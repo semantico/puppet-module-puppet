@@ -1,0 +1,10 @@
+#!/bin/sh
+
+HOSTNAME=$( hostname -f )
+CA=/etc/puppet/ssl/certs/ca.pem
+CERT=/etc/puppet/ssl/certs/${HOSTNAME}.pem
+KEY=/etc/puppet/ssl/private_keys/${HOSTNAME}.pem
+
+curl -H 'Accept: yaml' --cacert $CA  --cert $CERT --key $KEY $*
+
+echo 
