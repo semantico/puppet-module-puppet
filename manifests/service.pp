@@ -53,13 +53,6 @@ class puppet::service {
         mode  => 0440,
     }
 
-    # MP - this should not be in puppet module - need to refactor out to
-    # another class. Is it even required any more though?
-    file { "$rubysitedir/cidr.rb":
-        content => file("$f_dir/cidr.rb"),
-        mode    => 0444,
-    }
-
     #used in manufacturer custom fact
     realize Package[pciutils]
 
