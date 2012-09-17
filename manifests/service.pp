@@ -69,14 +69,14 @@ class puppet::service {
     case $operatingsystem {
         RedHat,CentOS: {
             package { "ruby-shadow": ensure => present }
-            package { "dmidecode": ensure => present }
+            realize Package["dmidecode"]
         }
         Debian,Ubuntu: {
             file { "/etc/default/puppet":
                 content => template("puppet/puppet.default"),
                 require => Package['puppet'],
             }
-            realize Package[dmidecode]
+            realize Package["dmidecode"]
         }
     }
 
