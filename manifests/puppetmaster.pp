@@ -17,16 +17,18 @@ class puppet::puppetmaster {
     }
 
     # Puppetmasters need mkpasswd to be able to auto-create missing password hashes that are required
-    case $lsbdistcodename {
-        sarge,etch,lenny,hardy,karmic,jaunty: {
-            # These seem to have mkpasswd within the whois package!
+    case $operatingsystem {
+        ubuntu,debian: { 
+            case $lsbdistcodename {
+                sarge,etch,lenny,hardy,karmic,jaunty: {
+                    # These seem to have mkpasswd within the whois package!
+                }
+                default: {
+                    package { "mkpasswd": ensure => present }
+                }
+            }
         }
-        redhat,centos: {
-            # mkpasswd doesn't have a package
-        }
-        default: {
-            package { "mkpasswd": ensure => present }
-        }
+        default: { }
     }
 
     include puppet::common
