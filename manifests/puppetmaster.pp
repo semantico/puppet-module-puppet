@@ -21,6 +21,9 @@ class puppet::puppetmaster {
         sarge,etch,lenny,hardy,karmic,jaunty: {
             # These seem to have mkpasswd within the whois package!
         }
+        redhat,centos: {
+            # mkpasswd doesn't have a package
+        }
         default: {
             package { "mkpasswd": ensure => present }
         }
