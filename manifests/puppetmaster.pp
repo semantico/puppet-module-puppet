@@ -10,10 +10,10 @@ class puppet::puppetmaster {
     }
 
     case $operatingsystem {
-        debian: { package { puppetmaster: ensure => present, } }
-        ubuntu: { package { puppetmaster: ensure => present, } }
-        centos: { package { puppet-server: ensure => present, } }
-        redhat: { package { puppet-server: ensure => present, } }
+        debian: { package { puppetmaster: ensure => lookup_value("${environment}-puppetmaster-version", "2.7.16" } }
+        ubuntu: { package { puppetmaster: ensure => lookup_value("${environment}-puppetmaster-version", "2.7.16" } }
+        centos: { package { puppet-server: ensure => lookup_value("${environment}-puppetmaster-version", "2.6.17-2" } }
+        redhat: { package { puppet-server: ensure => lookup_value("${environment}-puppetmaster-version", "2.6.17-2" } }
     }
 
     # Puppetmasters need mkpasswd to be able to auto-create missing password hashes that are required

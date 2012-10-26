@@ -1,4 +1,10 @@
 puppet-module-puppet
 ====================
 
-Bootstrapping puppet/puppetmaster module
+Basic puppet module for deployment of generic puppet nodes and 
+a basic puppetmaster
+
+* requires puppet-module-sempub
+* requires puppet-module-common
+
+
