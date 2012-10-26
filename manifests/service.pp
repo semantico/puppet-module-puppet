@@ -6,17 +6,17 @@ class puppet::service {
     include puppet::common
 
     case $operatingsystem {
-        debian: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.7.16" } }
-        ubuntu: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.7.16" } }
-        centos: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.6.17-2.el6" } }
-        redhat: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.6.17-2.el6" } }
+        debian: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.7.16") } }
+        ubuntu: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.7.16") } }
+        centos: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.6.17-2.el6") } }
+        redhat: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.6.17-2.el6") } }
     }
 
     case $operatingsystem {
-        debian: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.4" } }
-        ubuntu: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.4" } }
-        centos: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.6-1.el6" } }
-        redhat: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.6-1.el6" } }
+        debian: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.4") } }
+        ubuntu: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.4") } }
+        centos: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.6-1.el6") } }
+        redhat: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.6-1.el6") } }
     }
 
     File {
