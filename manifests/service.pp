@@ -5,46 +5,18 @@ class puppet::service {
 
     include puppet::common
 
-    package { puppet:
-        ensure => $puppet_client_upgrade ? {
-            "2.7" => $operatingsystem ? {
-                /(Debian|Ubuntu)/ => $lsbdistcodename ? {
-                    'sarge' => '2.7.9-1puppetlabs3~1etch',
-                    'etch' => '2.7.9-1puppetlabs3~1etch',
-                    'lenny' => '2.7.9-1puppetlabs3~1etch',
-                    default => '2.7.16-1puppetlabs1'
-                },
-                "RedHat" => $lsbmajdistrelease ? {
-                    '4' => present,
-                    default => '2.7.9-1.el5'
-                },
-                "CentOS" => $lsbmajdistrelease ? {
-                    '4' => latest,
-                    default => '2.7.9-1.el5'
-                },
-                default => present,
-            },
-            default => present
-        }
+    case $operatingsystem {
+        debian: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.7.16" } }
+        ubuntu: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.7.16" } }
+        centos: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.6.17-2.el6" } }
+        redhat: { package { puppet: ensure => lookup_value("${environment}-puppet-version", "2.6.17-2.el6" } }
     }
 
-    package { facter:
-        ensure => $puppet_client_upgrade ? {
-            "2.7" => $operatingsystem ? {
-                "CentOS" => $lsbmajdistrelease ? {
-                    '4' => '1.6.4-1',
-                    '5' => '1.6.4-1el5',
-                    default => '1.6.4-1puppetlabs1'
-                },
-                "RedHat" => $lsbmajdistrelease ? {
-                    '4' => present,
-                    '5' => '1.6.4-1el5',
-                    default => '1.6.4-1puppetlabs1'
-                },
-                default => present
-            },
-            default => present
-        }
+    case $operatingsystem {
+        debian: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.4" } }
+        ubuntu: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.4" } }
+        centos: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.6-1.el6" } }
+        redhat: { package { puppet: ensure => lookup_value("${environment}-facter-version", "1.6.6-1.el6" } }
     }
 
     File {
